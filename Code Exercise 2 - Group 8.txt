@@ -315,16 +315,20 @@ view model =
   <| case model.page of 
        Welcome -> [ group [ rect 300 90 |> filled yellow 
                           , rect 300 90 |> outlined (solid 1) black
-                          , "Start Game" |> text |> size 50 |> filled black |> move (-110, -15)] |> move (0, -150) |> notifyTap ChangePageState 
+                          , "Start Game" |> text |> size 50 |> filled black |> move (-110, -15)] |> move (0, -165) |> notifyTap ChangePageState 
                    ,"Frog Game" |> text |> size 60 |> filled darkBlue |> move (-140, 150)
                    , text "Instructions:" 
-                       |> size 20 |> centered |> filled black |> move (-140,40)
-                   , text "Click on the letters in order to spell your word"
+                       |> size 20 |> centered |> filled orange |> move (-160,100)
+                   , text " Spell as many words as you can in 60 seconds. Click on the"
+                       |> size 18 |> centered |> filled black |> move (0, 60)
+                   , text "letters in order to spell your word, but avoid the others"
+                       |> size 18 |> centered |> filled black |> move (0, 30)
+                   , text " as time is running out and the frog is hungry."
                        |> size 18 |> centered |> filled black |> move (0, 0)
-                  , text "but avoid the others, hurry up the frog is hungry."
-                       |> size 18 |> centered |> filled black |> move (0, -30)
-                  , text "The score goes up by 10 with every correct letter "
-                       |> size 18 |> centered |> filled black |> move (0, -60)     
+                   , text "The score goes up by 10 with every correct letter and the"
+                       |> size 18 |> centered |> filled black |> move (0, -50)  
+                   , text "\"pass\" button can be used to skip questions." 
+                       |> size 18 |> centered |> filled black |> move (0, -80)  
                                          ]
        Game ->  [(group <| model.shape { time = model.time }) --display shape
                     |> clip (square 100 |> ghost)
@@ -364,10 +368,6 @@ view model =
                            ] |> move (0, -200) |> notifyTap ChangePageState |> notifyTap GetNewPicture
                    
                                          ]                                  
-
--- draw a bubble with a letter in it
-
-
 
 -- find rotation angle
 
@@ -410,8 +410,8 @@ make_posX yPos list1 new_list =
       make_posX yPos xs (new_list ++ [(((toFloat (-130 + 35 * x))), yPos) ]) 
     [] ->
       new_list 
-      
--- command to ask for a lower-case letter
+
+-- draw a bubble with a letter in it
 circle_list list circList =
   case list of 
     x :: xs ->
@@ -436,3 +436,5 @@ sampleLetter lett = group [ circle 12 |> filled white
                                  |> scale 1.2 
                                  |> move (-3, -3)
                           ]
+
+
